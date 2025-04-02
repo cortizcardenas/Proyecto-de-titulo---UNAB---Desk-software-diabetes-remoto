@@ -1,7 +1,7 @@
 # DiabetesApp — Aplicación Local en Python para Educación y Control de Diabetes
 
 **Autor:** Carlos Ortiz Cárdenas  
-**Profesor Guía:** Edgardo Fuentes  
+**Profesor Guía:** Barbarita Lara  
 **Carrera:** Ingeniería en Computación e Informática  
 **Fecha de inicio:** Enero 2025  
 **Versión:** 1.1
