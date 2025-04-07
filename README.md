@@ -3,7 +3,7 @@
 **Autor:** Carlos Ortiz Cárdenas  
 **Profesor Guía:** Barbarita Lara  
 **Carrera:** Ingeniería en Computación e Informática  
-**Fecha de inicio:** Enero 2025  
+**Fecha de inicio:** Marzo 2025  
 **Versión:** 1.1
 
 ---
