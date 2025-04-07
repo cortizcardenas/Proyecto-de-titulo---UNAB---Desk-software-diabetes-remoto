@@ -1,4 +1,4 @@
-# CHANGELOG - Proyecto: App local de manejo y educación en diabetes
+# CHANGELOG - Proyecto: Diabeduca - App local de manejo y educación en diabetes
 
 ## [2025-03-19] - Inicio del proyecto
 - Se crea la carpeta `app_diabetes` en Visual Studio Code.
@@ -51,7 +51,26 @@
 ## [2025-04-01] - Preparación de documentación
 - Inicio de documentación para GitHub.
 - Creación de CHANGELOG con fechas reales.
-- Se actualiza repositorio de GITHUB con código actual.
+- Se actualiza repositorio de GitHub con código actual.
+
+---
+
+## [2025-04-05] y [2025-04-06] - Personalización visual y branding
+### Añadido
+- Logotipo personalizado de **Diabeduca** en todas las pantallas.
+- Eslogan oficial: *"Educación y control, en tus manos"*.
+- Nuevo diseño de la pantalla de bienvenida con logo prominente.
+- Mejor contraste y visibilidad en los inputs.
+- Estilo visual coherente con tipografía y distribución.
+
+### Cambiado
+- Actualización del diseño visual general para mejorar experiencia de usuario.
+- Mejora en la presentación del historial de glicemia.
+- Optimización de espaciados y márgenes entre componentes.
+- Ajuste en los colores para mejor contraste.
+- Tamaños de fuente más consistentes entre pantallas.
+
+---
 
 ## Funcionalidades actuales implementadas
 - Ingreso de nombre con validación.
@@ -60,8 +79,11 @@
 - Alertas según resultado.
 - Historial visual con fecha, nombre y valor.
 - Limpieza automática del input tras registro.
+- Interfaz estilizada con identidad visual clara.
+- Estructura completa de navegación entre pantallas.
 
 ## Próximos pasos
-- Guardar datos de glicemia en almacenamiento persistente.
-- Implementar módulo educativo y de recomendaciones.
+- Guardar datos de glicemia en almacenamiento persistente (SQLite).
+- Implementar módulo educativo y de recomendaciones dinámicas.
 - Crear sistema de alertas configurables.
+- Mejorar accesibilidad y escalabilidad del sistema.

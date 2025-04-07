@@ -35,12 +35,18 @@ Desarrollar una aplicación local que facilite el monitoreo personalizado y la e
 ## 🔧 Producto Mínimo Viable (MVP)
 
 - 📝 Registro manual de glicemia con fecha y hora.
-- 🍽️ Ingreso básico de alimentación (texto libre o categorías simples).
-- 🏃 Registro de actividad física con tipo y duración.
 - 💬 Sistema de recomendaciones educativas según reglas básicas.
 - 🔔 Alertas locales dentro de la aplicación.
 - 🧠 Funcionamiento completamente local usando SQLite.
 - 👤 Uso sin login para facilitar la experiencia y privacidad.
+
+---
+
+##Rangos de Glicemia
+
+- 🔴 Bajo: < 70 mg/dL
+- ✅ Normal: 70-180 mg/dL
+- 🟡 Alto: > 180 mg/dL
 
 ---
 
