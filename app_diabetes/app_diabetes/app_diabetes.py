@@ -1,5 +1,7 @@
 import reflex as rx
 from datetime import datetime
+from .pages.educacion import educacion
+from .charts.glucose_charts import graficos
 
 
 
@@ -11,9 +13,20 @@ class FormState(rx.State):
     mostrar_formulario: bool = False
     error_nombre: str = ""
     historial: list[dict] = []
+    modulo_seleccionado: str = ""
 
     def set_nombre(self, nombre):
         self.nombre = nombre.strip()
+
+    def set_modulo(self, modulo):
+        self.modulo_seleccionado = modulo
+        if modulo == "Educación":
+            return rx.redirect("/educacion")
+        elif modulo == "Gráficos":
+            return rx.redirect("/graficos")
+        elif modulo == "Registro":
+            self.mostrar_formulario = True
+            return None
 
     def mostrar(self):
         if self.nombre == "":
@@ -29,6 +42,7 @@ class FormState(rx.State):
         self.color_alerta = "green"
         self.mostrar_formulario = False
         self.error_nombre = ""
+        self.modulo_seleccionado = ""
 
     def set_glicemia(self, glicemia):
         try:
@@ -115,6 +129,13 @@ def index():
                             on_click=FormState.reset_formulario,
                             size="3"
                         ),
+                        rx.select(
+                            ["Educación", "Gráficos" , "Registro"],
+                            placeholder="Seleccionar modulo",
+                            on_change=FormState.set_modulo,
+                            width="300px",
+                            size="3"
+                        ),
                         spacing="2",
                         margin_bottom="1em"
                     ),
@@ -189,7 +210,7 @@ def index():
                         margin_bottom="1.5em"
                     ),
                     rx.input(
-                        placeholder="Nombre completo",
+                        placeholder="Por favor, ingresa tu nombre",
                         on_change=FormState.set_nombre,
                         width="300px",
                         margin_bottom="1em",
@@ -227,5 +248,31 @@ def index():
     )
 
 
+def graficos():
+    """Renderiza la página de gráficos."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("MÓDULO DE GRÁFICOS EN PROGRESO", size="6", color="blue.800"),
+            rx.text("Este módulo está actualmente en desarrollo", color="gray.600"),
+            rx.button(
+                "Volver",
+                on_click=lambda: rx.redirect("/"),
+                color_scheme="blue",
+                size="3"
+            ),
+            spacing="4",
+            align="center",
+            padding="2em",
+            border_radius="lg",
+            box_shadow="lg",
+            bg="gray.50"
+        ),
+        padding="2em",
+        bg="gray.200"
+    )
+
+
 app = rx.App()
 app.add_page(index)
+app.add_page(educacion, route="/educacion")
+app.add_page(graficos, route="/graficos")

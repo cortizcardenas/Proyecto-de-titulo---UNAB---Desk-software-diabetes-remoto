@@ -16,5 +16,48 @@ def create_glucose_chart(data):
     Returns:
         rx.Component: Componente de gráfico de Plotly.
     """
-    # Implementación del gráfico próximamente
-    pass 
+    # Datos de ejemplo para el gráfico
+    fechas = [datetime.now() - timedelta(days=i) for i in range(7)]
+    valores = [120, 140, 110, 130, 150, 125, 135]
+
+    # Crear el gráfico
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=fechas,
+        y=valores,
+        mode='lines+markers',
+        name='Nivel de Glucosa'
+    ))
+
+    # Personalizar el diseño
+    fig.update_layout(
+        title='Niveles de Glucosa en la última semana',
+        xaxis_title='Fecha',
+        yaxis_title='Nivel de Glucosa (mg/dL)',
+        template='plotly_white'
+    )
+
+    return rx.plotly(data=fig, height="400px")
+
+def graficos():
+    """Renderiza la página de gráficos."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Visualización de Niveles de Glucosa", size="6", color="blue.800"),
+            create_glucose_chart([]),  # Pasamos una lista vacía por ahora
+            rx.button(
+                "Volver",
+                on_click=lambda: rx.redirect("/"),
+                color_scheme="blue",
+                size="3"
+            ),
+            spacing="4",
+            align="center",
+            padding="2em",
+            border_radius="lg",
+            box_shadow="lg",
+            bg="gray.50"
+        ),
+        padding="2em",
+        bg="gray.200"
+    ) 
