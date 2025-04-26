@@ -54,6 +54,7 @@ Desarrollar una aplicación local que facilite el monitoreo personalizado y la e
 
 - **Lenguaje principal:** Python 3.x
 - **Framework UI:** [Reflex](https://reflex.dev/)
+- **Visualización de datos:** [Plotly](https://plotly.com/)
 - **Almacenamiento:** SQLite (modo local)
 - **Control de versiones:** Git + GitHub
 - **Documentación:** Markdown (README.md), PDF (memoria técnica)
@@ -86,28 +87,34 @@ Esto levantará un servidor local y abrirá la aplicación en tu navegador (por 
 
 ---
 
-## 📁 Estructura del Proyecto (propuesta actual)
+## 📁 Estructura del Proyecto (actualizada)
 
 ```
 diabetesapp/
 ├── app_diabetes/         # Código fuente del proyecto Reflex
 │   ├── __init__.py
-│   ├── app.py
-│   └── pages/            # Pantallas de la app
-├── assets/               # Íconos e imágenes
-├── reflex.json           # Configuración del proyecto Reflex
-├── .gitignore            # Archivos ignorados por Git
-├── README.md             # Este archivo
-└── requirements.txt      # Dependencias (opcional)
+│   ├── app_diabetes.py   # Archivo principal
+│   ├── charts/          # Módulo de gráficos
+│   │   └── glucose_charts.py
+│   ├── pages/           # Módulos de la aplicación
+│   │   └── educacion.py
+│   └── state/           # Estados de la aplicación
+│       └── educational_state.py
+├── assets/              # Íconos e imágenes
+├── .gitignore          # Archivos ignorados por Git
+├── README.md           # Este archivo
+├── CHANGELOG.md        # Historial de cambios
+└── requirements.txt    # Dependencias
 ```
-
----
 
 ## 🔄 Estado Actual del Proyecto
 
 - ✔️ Fase de planificación completada
 - ✔️ Interfaz inicial funcional con Reflex
-- 🔧 En desarrollo: ingreso de datos, validación de glicemia, diseño educativo
+- ✔️ Módulo de registro de glicemia implementado
+- ✔️ Módulo de educación en desarrollo
+- ✔️ Módulo de gráficos implementado
+- 🔧 En desarrollo: persistencia de datos, recomendaciones dinámicas
 
 ---
 

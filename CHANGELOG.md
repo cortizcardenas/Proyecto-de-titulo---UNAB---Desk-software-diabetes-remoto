@@ -72,6 +72,26 @@
 
 ---
 
+## [2025-04-07] - Implementación de módulos y navegación
+### Añadido
+- Nuevo menú desplegable para navegación entre módulos
+- Módulo de Educación con página dedicada
+- Módulo de Gráficos con visualización de datos
+- Opción de Registro para volver al formulario principal
+- Estado para el módulo de educación
+
+### Cambiado
+- Mejorada la navegación entre módulos
+- Actualizado el diseño del menú desplegable
+- Optimizada la experiencia de usuario en la navegación
+- Mejorada la presentación de los módulos
+
+### Técnico
+- Implementación de redirección entre módulos
+- Integración de Plotly para visualización de gráficos
+- Creación de estados específicos para cada módulo
+- Optimización del código para mejor mantenibilidad
+
 ## Funcionalidades actuales implementadas
 - Ingreso de nombre con validación.
 - Registro manual de glicemia.
