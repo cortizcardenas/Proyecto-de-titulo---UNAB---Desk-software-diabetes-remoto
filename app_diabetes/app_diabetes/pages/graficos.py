@@ -1,13 +1,47 @@
 """
-Módulo de educación de Diabeduca.
-Contiene el contenido educativo sobre diabetes y su manejo.
+Módulo de gráficos para visualización de niveles de glucosa.
 """
 
 import reflex as rx
+import plotly.graph_objects as go
+from datetime import datetime, timedelta
 from app_diabetes.state.navigation_state import NavigationState
 
-def educacion():
-    """Renderiza la página de contenido educativo."""
+def create_glucose_chart(data):
+    """
+    Crea un gráfico de línea para mostrar los niveles de glucosa a lo largo del tiempo.
+    
+    Args:
+        data (list): Lista de diccionarios con fechas y niveles de glucosa.
+    
+    Returns:
+        rx.Component: Componente de gráfico de Plotly.
+    """
+    # Datos de ejemplo para el gráfico
+    fechas = [datetime.now() - timedelta(days=i) for i in range(7)]
+    valores = [120, 140, 110, 130, 150, 125, 135]
+
+    # Crear el gráfico
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=fechas,
+        y=valores,
+        mode='lines+markers',
+        name='Nivel de Glucosa'
+    ))
+
+    # Personalizar el diseño
+    fig.update_layout(
+        title='Niveles de Glucosa en la última semana',
+        xaxis_title='Fecha',
+        yaxis_title='Nivel de Glucosa (mg/dL)',
+        template='plotly_white'
+    )
+
+    return rx.plotly(data=fig, height="400px")
+
+def graficos():
+    """Renderiza la página de gráficos."""
     return rx.container(
         rx.vstack(
             rx.hstack(
@@ -26,7 +60,7 @@ def educacion():
                 ),
                 rx.vstack(
                     rx.heading(
-                        "🩸 Diabeduca - Módulo de Educación",
+                        "🩸 Diabeduca - Módulo de Gráficos",
                         size="6",
                         color="blue.800",
                     ),
@@ -61,8 +95,8 @@ def educacion():
                 box_shadow="sm"
             ),
             rx.vstack(
-                rx.heading("MÓDULO DE EDUCACIÓN EN PROGRESO", size="6", color="blue.800"),
-                rx.text("Este módulo está actualmente en desarrollo", color="gray.600"),
+                rx.heading("Visualización de Niveles de Glucosa", size="6", color="blue.800"),
+                create_glucose_chart([]),  # Pasamos una lista vacía por ahora
                 spacing="4",
                 align="center",
                 padding="2em",

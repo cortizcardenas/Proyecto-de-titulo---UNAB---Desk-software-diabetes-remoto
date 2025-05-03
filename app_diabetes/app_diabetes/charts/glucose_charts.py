@@ -43,16 +43,61 @@ def graficos():
     """Renderiza la página de gráficos."""
     return rx.container(
         rx.vstack(
-            rx.heading("Visualización de Niveles de Glucosa", size="6", color="blue.800"),
-            create_glucose_chart([]),  # Pasamos una lista vacía por ahora
-            rx.button(
-                "Volver",
-                on_click=lambda: rx.redirect("/"),
-                color_scheme="blue",
-                size="3"
+            rx.hstack(
+                rx.image(
+                    src="/images/logo2.png",
+                    height="60px",
+                    margin_right="1em"
+                ),
+                rx.vstack(
+                    rx.heading(
+                        "🩸 Diabeduca - Módulo de Gráficos",
+                        size="6",
+                        color="blue.800",
+                    ),
+                    rx.text(
+                        "Educación y control, en tus manos",
+                        color="gray.600",
+                        font_style="italic"
+                    ),
+                    align="start",
+                ),
+                rx.spacer(),
+                rx.select(
+                    ["Educación", "Gráficos"],
+                    placeholder="Seleccionar modulo",
+                    on_change=lambda x: rx.redirect(f"/{x.lower()}"),
+                    width="300px",
+                    size="3",
+                    bg="gray.50",
+                    color="black",
+                    _placeholder={"color": "blackAlpha.700"},
+                    _hover={"bg": "gray.100"},
+                    _focus={"bg": "gray.100"}
+                ),
+                width="100%",
+                padding="1em",
+                bg="gray.50",
+                border_bottom="1px solid",
+                border_color="gray.200",
+                position="sticky",
+                top="0",
+                z_index="1000",
+                box_shadow="sm"
+            ),
+            rx.vstack(
+                rx.heading("Visualización de Niveles de Glucosa", size="6", color="blue.800"),
+                create_glucose_chart([]),  # Pasamos una lista vacía por ahora
+                spacing="4",
+                align="center",
+                padding="2em",
+                border_radius="lg",
+                box_shadow="lg",
+                bg="gray.50"
             ),
             spacing="4",
-            align="center",
+            width="100%",
+            max_width="800px",
             padding="2em",
             border_radius="lg",
             box_shadow="lg",

@@ -1,0 +1,59 @@
+# CHANGELOG - Proyecto: Diabeduca - App local de manejo y educación en diabetes
+
+## [2025-05-02] - Versión 1.2 (actualización mayor)
+### Añadido
+- Persistencia real de datos usando SQLite: los registros de glicemia y usuarios se guardan y recuperan correctamente del disco duro.
+- Login y registro de usuarios con validación y mensajes de error claros.
+- Carga automática del historial de registros al iniciar sesión.
+- Botón de inicio (🏠) siempre visible para volver a la pantalla principal desde cualquier módulo.
+- Navegación bidireccional y fluida entre los módulos de Educación y Gráficos.
+- Estado de navegación centralizado y compartido entre módulos.
+
+### Corregido
+- El historial de registros ahora se obtiene siempre desde la base de datos, no solo desde la memoria.
+- Se resuelven problemas de visualización y actualización del historial tras guardar nuevos registros.
+- Se corrige el manejo del estado del usuario y la limpieza de datos al cerrar sesión.
+- Se corrige el error de uso de `len()` en variables de estado de Reflex.
+
+### Cambiado
+- Mejorada la estructura y documentación del código.
+- Actualizado el README y este CHANGELOG con las novedades.
+- Mejorada la experiencia de usuario y la navegación general.
+
+---
+
+## [2025-04-07] - Implementación de módulos y navegación
+### Añadido
+- Nuevo menú desplegable para navegación entre módulos
+- Módulo de Educación con página dedicada
+- Módulo de Gráficos con visualización de datos
+- Opción de Registro para volver al formulario principal
+- Estado para el módulo de educación
+
+### Cambiado
+- Mejorada la navegación entre módulos
+- Actualizado el diseño del menú desplegable
+- Optimizada la experiencia de usuario en la navegación
+- Mejorada la presentación de los módulos
+
+### Técnico
+- Implementación de redirección entre módulos
+- Integración de Plotly para visualización de gráficos
+- Creación de estados específicos para cada módulo
+- Optimización del código para mejor mantenibilidad
+
+## Funcionalidades actuales implementadas
+- Ingreso de nombre con validación.
+- Registro manual de glicemia.
+- Validación por rango saludable.
+- Alertas según resultado.
+- Historial visual con fecha, nombre y valor.
+- Limpieza automática del input tras registro.
+- Interfaz estilizada con identidad visual clara.
+- Estructura completa de navegación entre pantallas.
+
+## Próximos pasos
+- Guardar datos de glicemia en almacenamiento persistente (SQLite).
+- Implementar módulo educativo y de recomendaciones dinámicas.
+- Crear sistema de alertas configurables.
+- Mejorar accesibilidad y escalabilidad del sistema. 
