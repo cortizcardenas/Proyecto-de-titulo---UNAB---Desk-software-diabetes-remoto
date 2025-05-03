@@ -22,6 +22,7 @@ class FormState(rx.State):
     modulo_seleccionado: str = ""
     es_registro: bool = True  # True para registro, False para inicio de sesión
     usuario_id: int = 0  # ID del usuario actual
+    promedio_glicemia: float = 0.0  # Nuevo campo para el promedio
 
     def set_nombre(self, nombre):
         self.nombre = nombre.strip()
@@ -39,6 +40,15 @@ class FormState(rx.State):
         self.error_nombre = ""
         self.error_correo = ""
 
+    def calcular_promedio(self):
+        """Calcula el promedio de glicemia basado en el historial."""
+        if not self.historial:
+            self.promedio_glicemia = 0.0
+            return
+        
+        suma = sum(item['glicemia'] for item in self.historial)
+        self.promedio_glicemia = round(suma / len(self.historial), 1)
+
     def cargar_historial(self):
         """Carga el historial de registros desde la base de datos."""
         if self.usuario_id > 0:
@@ -51,6 +61,7 @@ class FormState(rx.State):
                 }
                 for registro in registros
             ]
+            self.calcular_promedio()  # Calcular el promedio después de cargar el historial
 
     def mostrar(self):
         if self.correo == "":
@@ -103,6 +114,7 @@ class FormState(rx.State):
         self.es_registro = True
         self.usuario_id = 0
         self.historial = []
+        self.promedio_glicemia = 0.0
 
     def set_glicemia(self, glicemia):
         try:
@@ -126,6 +138,7 @@ class FormState(rx.State):
             if db_manager.registrar_glicemia(self.usuario_id, self.glicemia):
                 # Actualizar el historial
                 self.cargar_historial()
+                self.calcular_promedio()  # Recalcular el promedio después de guardar
 
         self.glicemia = 0
 
@@ -133,138 +146,164 @@ def index():
     return rx.container(
         rx.cond(
             FormState.mostrar_formulario,
-            rx.vstack(
-                rx.hstack(
-                    rx.button(
-                        "🏠",
-                        on_click=NavigationState.ir_a_inicio,
-                        size="3",
-                        variant="ghost",
-                        color_scheme="blue",
-                        margin_right="1em"
+            rx.fragment(
+                rx.box(
+                    rx.vstack(
+                        rx.text(
+                            "Promedio actual de glicemia",
+                            font_weight="bold",
+                            color="gray.100"
+                        ),
+                        rx.text(
+                            f"{FormState.promedio_glicemia} mg/dL",
+                            font_size="2xl",
+                            color="gray.100"
+                        ),
+                        align="center"
                     ),
-                    rx.image(
-                        src="/images/logo2.png",
-                        height="60px",
-                        margin_right="1em"
+                    padding="1em",
+                    border_radius="md",
+                    bg="gray.50",
+                    box_shadow="lg",
+                    width="250px",
+                    position="fixed",
+                    top="90px",
+                    left="30px",
+                    z_index="2000"
+                ),
+                rx.vstack(
+                    rx.hstack(
+                        rx.button(
+                            "🏠",
+                            on_click=NavigationState.ir_a_inicio,
+                            size="3",
+                            variant="ghost",
+                            color_scheme="blue",
+                            margin_right="1em"
+                        ),
+                        rx.image(
+                            src="/images/logo2.png",
+                            height="60px",
+                            margin_right="1em"
+                        ),
+                        rx.vstack(
+                            rx.heading(
+                                f"🩸 Diabeduca - {FormState.nombre}",
+                                size="6",
+                                color="blue.800",
+                            ),
+                            rx.text(
+                                "Educación y control, en tus manos",
+                                color="gray.600",
+                                font_style="italic"
+                            ),
+                            align="start",
+                        ),
+                        rx.spacer(),
+                        rx.select(
+                            ["Educación", "Gráficos"],
+                            placeholder="Seleccionar modulo",
+                            on_change=FormState.set_modulo,
+                            width="300px",
+                            size="3",
+                            bg="gray.50",
+                            color="black",
+                            _placeholder={"color": "blackAlpha.700"},
+                            _hover={"bg": "gray.100"},
+                            _focus={"bg": "gray.100"}
+                        ),
+                        width="100%",
+                        padding="1em",
+                        bg="gray.50",
+                        border_bottom="1px solid",
+                        border_color="gray.200",
+                        position="sticky",
+                        top="0",
+                        z_index="1000",
+                        box_shadow="sm"
+                    ),
+                    rx.vstack(
+                        rx.input(
+                            placeholder="Nivel de glicemia (mg/dL)",
+                            type="number",
+                            value=FormState.glicemia,
+                            on_change=FormState.set_glicemia,
+                            width="300px",
+                            margin_bottom="1em",
+                            bg="white",
+                            color="black",
+                            _placeholder={"color": "blackAlpha.700"},
+                            _hover={"bg": "white"},
+                            _focus={"bg": "white"}
+                        ),
+                        rx.hstack(
+                            rx.button(
+                                "Guardar",
+                                on_click=FormState.guardar_datos,
+                                color_scheme="blue",
+                                size="3"
+                            ),
+                            spacing="2",
+                            margin_bottom="1em"
+                        ),
+                        rx.cond(
+                            FormState.mensaje != "",
+                            rx.hstack(
+                                rx.box(
+                                    width="15px",
+                                    height="15px",
+                                    border_radius="50%",
+                                    bg=FormState.color_alerta
+                                ),
+                                rx.text(
+                                    FormState.mensaje,
+                                    color=FormState.color_alerta,
+                                    font_weight="bold"
+                                ),
+                                spacing="2",
+                                align="center",
+                                margin_bottom="1em"
+                            )
+                        ),
+                        width="100%",
+                        align="center"
                     ),
                     rx.vstack(
                         rx.heading(
-                            f"🩸 Diabeduca - {FormState.nombre}",
-                            size="6",
-                            color="blue.800",
+                            "📋 Historial de Registros",
+                            size="5",
+                            color="blue.600",
+                            margin_bottom="1em"
                         ),
-                        rx.text(
-                            "Educación y control, en tus manos",
-                            color="gray.600",
-                            font_style="italic"
-                        ),
-                        align="start",
-                    ),
-                    rx.spacer(),
-                    rx.select(
-                        ["Educación", "Gráficos"],
-                        placeholder="Seleccionar modulo",
-                        on_change=FormState.set_modulo,
-                        width="300px",
-                        size="3",
-                        bg="gray.50",
-                        color="black",
-                        _placeholder={"color": "blackAlpha.700"},
-                        _hover={"bg": "gray.100"},
-                        _focus={"bg": "gray.100"}
-                    ),
-                    width="100%",
-                    padding="1em",
-                    bg="gray.50",
-                    border_bottom="1px solid",
-                    border_color="gray.200",
-                    position="sticky",
-                    top="0",
-                    z_index="1000",
-                    box_shadow="sm"
-                ),
-                rx.vstack(
-                    rx.input(
-                        placeholder="Nivel de glicemia (mg/dL)",
-                        type="number",
-                        value=FormState.glicemia,
-                        on_change=FormState.set_glicemia,
-                        width="300px",
-                        margin_bottom="1em",
-                        bg="white",
-                        color="black",
-                        _placeholder={"color": "blackAlpha.700"},
-                        _hover={"bg": "white"},
-                        _focus={"bg": "white"}
-                    ),
-                    rx.hstack(
-                        rx.button(
-                            "Guardar",
-                            on_click=FormState.guardar_datos,
-                            color_scheme="blue",
-                            size="3"
-                        ),
-                        spacing="2",
-                        margin_bottom="1em"
-                    ),
-                    rx.cond(
-                        FormState.mensaje != "",
-                        rx.hstack(
-                            rx.box(
-                                width="15px",
-                                height="15px",
-                                border_radius="50%",
-                                bg=FormState.color_alerta
+                        rx.cond(
+                            FormState.historial.length() > 0,
+                            rx.foreach(
+                                FormState.historial,
+                                lambda item: rx.text(
+                                    f"{item['fecha']} {item['hora']} - Glicemia: {item['glicemia']} mg/dL",
+                                    margin_bottom="0.5em"
+                                )
                             ),
                             rx.text(
-                                FormState.mensaje,
-                                color=FormState.color_alerta,
-                                font_weight="bold"
-                            ),
-                            spacing="2",
-                            align="center",
-                            margin_bottom="1em"
-                        )
-                    ),
-                    width="100%",
-                    align="center"
-                ),
-                rx.vstack(
-                    rx.heading(
-                        "📋 Historial de Registros",
-                        size="5",
-                        color="blue.600",
-                        margin_bottom="1em"
-                    ),
-                    rx.cond(
-                        FormState.historial.length() > 0,
-                        rx.foreach(
-                            FormState.historial,
-                            lambda item: rx.text(
-                                f"{item['fecha']} {item['hora']} - Glicemia: {item['glicemia']} mg/dL",
-                                margin_bottom="0.5em"
+                                "No hay registros disponibles",
+                                color="gray.500",
+                                font_style="italic"
                             )
                         ),
-                        rx.text(
-                            "No hay registros disponibles",
-                            color="gray.500",
-                            font_style="italic"
-                        )
+                        width="100%",
+                        align="center",
+                        padding="1em",
+                        border_radius="lg",
+                        bg="gray.50"
                     ),
+                    spacing="4",
                     width="100%",
-                    align="center",
-                    padding="1em",
+                    max_width="800px",
+                    padding="2em",
                     border_radius="lg",
+                    box_shadow="lg",
                     bg="gray.50"
                 ),
-                spacing="4",
-                width="100%",
-                max_width="800px",
-                padding="2em",
-                border_radius="lg",
-                box_shadow="lg",
-                bg="gray.50"
             ),
             rx.center(
                 rx.vstack(
