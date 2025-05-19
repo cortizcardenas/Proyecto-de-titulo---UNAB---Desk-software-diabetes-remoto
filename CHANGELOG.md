@@ -2,12 +2,32 @@
 
 ---
 
-## [2.0.0] - 2025-05-03
+## [2.1.0] - 18/05/2025
+### Añadido
+- Panel Informativo de Rangos
+  - Nueva sección con rangos de referencia clínicos
+  - Incluye valores normales, prediabetes y diabetes
+  - Presentación visual con códigos de color
+
+## [2.0.1] - 12/05/2025 al 18/05/2025
+### Añadido
+- Sistema de Contadores
+  - Contador de lecturas bajas
+  - Contador de lecturas saludables
+  - Contador de lecturas altas
+
+## [2.0.0] - 05/05/2025 al 11/05/2025
+### Añadido
+- Rangos de Referencia por Categoría
+  - Rangos en ayunas
+  - Rangos postprandiales (2 horas)
+  - Rangos postprandiales (3 horas)
+
 ### Cambios
 - Reemplazo completo del contenido del proyecto con nueva versión de Diabeduca.
 - Eliminación de paginas individuales por modulos.
--Creación de Dashboard interactivo el cual contiene y contendrá todos los modulos en una sola ventana.
--Cambios no afectan los objetivos de projecto.
+- Creación de Dashboard interactivo el cual contiene y contendrá todos los modulos en una sola ventana.
+- Cambios no afectan los objetivos de projecto.
 - Mejoras en el promedio de glicemia:
   - Implementación de promedio fijo.
   - Mejoras visuales.
@@ -16,7 +36,7 @@
 
 ---
 
-## [1.1.0] - 2025-04-20
+## [1.1.0] - 20/04/2025
 ### Cambios
 - Implementación de persistencia real de datos.
 - Mejoras en el sistema de login.
@@ -26,7 +46,7 @@
 
 ---
 
-## [2025-04-07] - Implementación de módulos y navegación
+## [1.0.1] - 07/04/2025
 ### Añadido
 - Nuevo menú desplegable para navegación entre módulos.
 - Módulo de Educación con página dedicada.
@@ -48,7 +68,7 @@
 
 ---
 
-## [2025-04-05] y [2025-04-06] - Personalización visual y estructura modular
+## [1.0.0] - 05/04/2025 y 06/04/2025
 ### Añadido
 - Logotipo personalizado de **Diabeduca** en todas las pantallas.
 - Eslogan oficial: *"Educación y control, en tus manos"*.
@@ -73,34 +93,34 @@
 
 ---
 
-## [2025-04-01] - Preparación de documentación
+## [0.9.0] - 01/04/2025
 - Inicio de documentación para GitHub.
 - Creación de CHANGELOG con fechas reales.
 - Se actualiza repositorio de GitHub con código actual.
 
 ---
 
-## [2025-03-27] al [2025-03-31] - Estabilización del código base
+## [0.8.0] - 27/03/2025 al 31/03/2025
 - Refactorización de funciones en el `State`.
 - Revisión completa del flujo y detección de bugs menores.
 - Mejoras en visualización del historial.
 
-## [2025-03-26] - Validaciones finales y limpieza de inputs
+## [0.7.0] - 26/03/2025
 - Ajuste de estilos.
 - Se eliminan valores si están fuera del rango permitido.
 - Se refactoriza código para separar lógica de validaciones.
 
-## [2025-03-25] - Ajustes menores
+## [0.6.0] - 25/03/2025
 - Se prueba flujo completo: ingreso nombre + glicemia + tabla.
 - Se valida limpieza de estado.
 - Pruebas de compatibilidad y errores menores.
 
-## [2025-03-24] - Refinamiento visual y funcional
+## [0.5.0] - 24/03/2025
 - Se mejora el layout de los componentes.
 - Validación de límites por glicemia ajustada.
 - Añadida lógica para evitar duplicación de datos vacíos.
 
-## [2025-03-23] - Historial local de glicemias
+## [0.4.0] - 23/03/2025
 - Se crea estructura `historial: list[dict]` para guardar registros localmente.
 - Implementación de tabla para mostrar:
   - Fecha
@@ -108,29 +128,29 @@
   - Valor de glicemia.
 - Limpieza automática del campo después de guardar.
 
-## [2025-03-22] - Registro de glicemia
+## [0.3.0] - 22/03/2025
 - Se agrega input numérico para valores de glicemia.
 - Se crea lógica para validar si el valor está dentro o fuera del rango saludable.
 - Se muestra alerta según el resultado.
 
-## [2025-03-21] - Validación de usuario y navegación
+## [0.2.0] - 21/03/2025
 - Reestructuración del flujo de navegación inicial con estados.
 - Ajustes visuales básicos para desktop.
 - Preparación para integrar nuevo input de glicemia.
 
-## [2025-03-20] - Estructura de bienvenida
+## [0.1.0] - 20/03/2025
 - Creación del primer `State` en Reflex.
 - Implementación de campo de texto para ingresar nombre del usuario.
 - Validación de campo vacío y navegación condicional.
 
-## [2025-03-19] - Inicio del proyecto
+## [0.0.1] - 19/03/2025
 - Se crea la carpeta `app_diabetes` en Visual Studio Code.
 - Se inicializa el proyecto con `reflex init`.
 - Instalación y configuración de Reflex 0.7.3.
 
 ---
 
-## [1.0.0] - 2024-05-01
+## [1.0.0] - 01/05/2025
 ### Cambios
 - Versión inicial del proyecto.
 - Implementación de la estructura base de la aplicación.
@@ -138,7 +158,7 @@
 
 ---
 
-## [No publicado] - 2024-03-19
+## [No publicado] - 19/03/2025
 ### Cambios
 - Actualización del repositorio principal con la última versión del proyecto.
 

@@ -5,7 +5,7 @@
 **Profesor guía seminario:** Francisco Alejandro Pérez  
 **Profesor guía proyecto:** Barbarita Lara Martínez  
 **Institución:** Universidad Andrés Bello – Sede Santiago  
-**Versión del MVP:** Abril 2025  
+**Versión del MVP:** Mayo 2025  
 
 ---
 
@@ -46,6 +46,9 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 5. **Gráficos interactivos:** evolución semanal y global de glicemia.
 6. **Visual web accesible:** navegación clara, diseño responsivo y logo institucional.
 7. **Funciona sin conexión permanente:** datos almacenados en SQLite localmente.
+8. **Rangos de referencia clínicos:** información detallada sobre rangos normales, prediabetes y diabetes.
+9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas.
+10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color.
 
 ---
 
@@ -65,6 +68,8 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 - Restricción de rango fisiológico para glicemia.
 - Solo se generan gráficos y sugerencias si hay registros válidos.
 - Visualización educativa solo con contexto previo.
+- Contadores automáticos de lecturas por categoría.
+- Rangos de referencia basados en guías clínicas actualizadas.
 
 ---
 
@@ -126,8 +131,11 @@ reflex run
 ## 📌 Estado Actual
 
 ✅ MVP funcional  
+✅ Sistema de contadores implementado  
+✅ Rangos de referencia clínicos agregados  
+✅ Panel informativo de rangos integrado  
 🔧 Desarrollo educativo en curso  
-📊 Visualización gráfica básica implementada  
+📊 Visualización gráfica mejorada  
 🧪 Pruebas unitarias en entorno local  
 🧠 Retroalimentación educativa validada con fuentes confiables
 
