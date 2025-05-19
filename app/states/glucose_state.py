@@ -68,6 +68,21 @@ class GlucoseState(rx.State):
         else:
             return "Saludable"
 
+    @rx.var
+    def count_low_readings(self) -> int:
+        """Cuenta el número de lecturas bajas."""
+        return len([r for r in self.readings if r["value"] < self.healthy_min])
+
+    @rx.var
+    def count_healthy_readings(self) -> int:
+        """Cuenta el número de lecturas saludables."""
+        return len([r for r in self.readings if self.healthy_min <= r["value"] <= self.healthy_max])
+
+    @rx.var
+    def count_high_readings(self) -> int:
+        """Cuenta el número de lecturas altas."""
+        return len([r for r in self.readings if r["value"] > self.healthy_max])
+
     def _get_reading_status(self, value: float) -> str:
         """Determines if a reading is low, healthy, or high based on ayuno range."""
         if value < self.healthy_min:
@@ -248,7 +263,7 @@ class GlucoseState(rx.State):
 
     @rx.event(background=True)
     async def delete_reading(self, reading_id: int):
-        """Deletes a specific glucose reading."""
+        """Elimina una lectura de glucosa."""
         async with self:
             auth_state = await self.get_state(AuthState)
             _user_id = (
@@ -258,26 +273,21 @@ class GlucoseState(rx.State):
             )
         if _user_id is None:
             yield rx.toast.error(
-                "Error de autenticación. No se puede eliminar la lectura."
+                "Debes iniciar sesión para eliminar lecturas."
             )
             return
         success = database.delete_glucose_reading(
-            reading_id, _user_id
+            _user_id, reading_id
         )
         if success:
-            async with self:
-                self.readings = [
-                    r
-                    for r in self.readings
-                    if r["id"] != reading_id
-                ]
-            yield rx.toast.info("Lectura eliminada.")
+            yield rx.toast.success("Lectura eliminada.")
+            yield GlucoseState.load_readings
         else:
             yield rx.toast.error(
-                "No se pudo eliminar la lectura. Puede que no exista o pertenezca a otro usuario."
+                "No se pudo eliminar la lectura."
             )
 
     @rx.event
     def set_new_reading_category(self, categoria: str):
-        """Actualiza la categoría para el nuevo formulario de lectura."""
+        """Actualiza la categoría seleccionada para una nueva lectura."""
         self.new_reading_category = categoria
