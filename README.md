@@ -77,18 +77,26 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 
 ```
 diabeduca/
-├── app_diabetes/           # Lógica Reflex: páginas, estados, componentes
-│   ├── pages/
-│   ├── state/
-│   ├── charts/
-│   ├── components/
-│   └── utils/
-├── assets/                 # Logos, íconos y material educativo
-├── data/                   # SQLite y persistencia local
-├── reflex.json             # Configuración del proyecto
-├── requirements.txt        # Librerías requeridas
-├── CHANGELOG.md            # Historial de cambios
-└── README.md               # Este archivo
+├── app/                    # Lógica principal de la aplicación
+│   ├── pages/             # Páginas de la aplicación
+│   ├── states/            # Estados y lógica de negocio
+│   ├── components/        # Componentes reutilizables
+│   ├── app.py            # Configuración principal de la aplicación
+│   ├── database.py       # Configuración y modelos de la base de datos
+│   └── __init__.py       # Inicialización del módulo
+├── assets/                # Recursos estáticos
+│   └── favicon.ico       # Ícono de la aplicación
+├── .states/              # Estados de Reflex
+├── .web/                 # Archivos generados por Reflex
+├── build/                # Archivos de construcción
+├── dist/                 # Distribución de la aplicación
+├── venv/                 # Entorno virtual de Python
+├── diabetes_management.db # Base de datos SQLite
+├── rxconfig.py          # Configuración de Reflex
+├── requirements.txt     # Dependencias del proyecto
+├── CHANGELOG.md         # Registro de cambios
+├── RELEASE_NOTES.md     # Notas de lanzamiento
+└── README.md            # Documentación principal
 ```
 
 ---
