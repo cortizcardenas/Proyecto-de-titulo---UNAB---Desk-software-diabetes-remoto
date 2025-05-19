@@ -103,17 +103,80 @@ diabeduca/
 
 ## 🚀 Cómo Ejecutar
 
+### Requisitos Previos
+- Python 3.11 o superior
+- pip (gestor de paquetes de Python)
+- Git
+- Visual Studio Code (recomendado) o Cursor IDE
+
+### Dependencias del Proyecto
+```bash
+# Framework y Backend
+reflex==0.7.8a1        # Framework web principal
+bcrypt==4.1.2         # Encriptación de datos
+sqlalchemy==2.0.28    # ORM para base de datos
+python-dotenv==1.0.1  # Manejo de variables de entorno
+
+# Base de Datos
+# SQLite3 viene incluido con Python 3.11, no requiere instalación adicional
+
+# Análisis de Datos y Visualización
+plotly==5.18.0        # Gráficos interactivos
+pandas==2.2.1         # Manipulación de datos
+numpy==1.26.4         # Cálculos numéricos
+
+# Herramientas de Desarrollo
+pytest==8.0.2         # Testing
+black==24.2.0         # Formateador de código
+ruff==0.2.2          # Linter
+```
+
+### Pasos de Instalación
+
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/tuusuario/diabeduca.git
-cd diabeduca
+git clone https://github.com/cortizcardenas/Proyecto-de-titulo---UNAB---Desk-software-diabetes-remoto.git
+cd Proyecto-de-titulo---UNAB---Desk-software-diabetes-remoto
 
-# 2. Instalar dependencias
-pip install reflex==0.7.3
+# 2. Crear y activar entorno virtual
+python -m venv venv
+# En Windows:
+venv\Scripts\activate
+# En Linux/Mac:
+source venv/bin/activate
 
-# 3. Ejecutar el sistema
+# 3. Instalar dependencias
+pip install -r requirements.txt
+
+# 4. Configurar el IDE (Visual Studio Code)
+# Instalar las siguientes extensiones:
+# - Python (Microsoft)
+# - Pylance
+# - Python Test Explorer
+# - Python Docstring Generator
+# - Black Formatter
+# - Ruff
+
+# 5. Inicializar la base de datos
+# La base de datos se creará automáticamente al ejecutar la aplicación
+
+# 6. Ejecutar el sistema
 reflex run
 ```
+
+### Notas Importantes
+- La aplicación se ejecutará en `http://localhost:3000` por defecto
+- La base de datos SQLite se creará automáticamente en la raíz del proyecto
+- Asegúrate de tener todos los permisos necesarios en el directorio del proyecto
+- Para desarrollo, se recomienda usar Visual Studio Code o Cursor IDE con las extensiones mencionadas
+
+### Solución de Problemas Comunes
+- Si hay problemas con reflex, intenta ejecutar `reflex init` antes de `reflex run`
+- En caso de errores de dependencias, ejecuta `pip install --upgrade -r requirements.txt`
+- Para limpiar la caché de reflex: `reflex db reset`
+- Si hay problemas con las extensiones del IDE, intenta recargar la ventana
+- Para problemas de formateo: `black .` en la raíz del proyecto
+- Para problemas de linting: `ruff check .` en la raíz del proyecto
 
 ---
 
