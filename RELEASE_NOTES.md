@@ -1,5 +1,20 @@
 # Notas de Lanzamiento - Diabeduca
 
+## Versión 2.1.2 (19/05/2025)
+### Características Principales
+- **Soporte para Acceso desde Red Local**
+  - Nuevo modo de ejecución para acceso desde red local
+  - Acceso desde cualquier dispositivo en la misma red WiFi/LAN
+  - Dos modos de ejecución disponibles:
+    1. Modo Local (reflex run)
+       - Solo accesible desde la computadora servidor
+       - URL: http://localhost:3000
+    2. Modo Red Local (reflex run --backend-host 0.0.0.0)
+       - Accesible desde cualquier dispositivo en la red
+       - URL: http://[IP-DEL-SERVIDOR]:3000
+  - Mejora en la documentación de modos de ejecución
+  - Optimización para pruebas en diferentes dispositivos
+
 ## Versión 2.1.1 (19/05/2025)
 ### Características Principales
 - **Exportación de Datos a CSV**

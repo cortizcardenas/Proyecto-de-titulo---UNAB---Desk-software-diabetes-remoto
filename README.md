@@ -171,6 +171,23 @@ reflex run
 - Asegúrate de tener todos los permisos necesarios en el directorio del proyecto
 - Para desarrollo, se recomienda usar Visual Studio Code o Cursor IDE con las extensiones mencionadas
 
+### Modos de Ejecución
+1. **Modo Local (reflex run)**
+   - Solo accesible desde la computadora donde se ejecuta
+   - URL: `http://localhost:3000`
+   - Ideal para desarrollo y pruebas locales
+
+2. **Modo Red Local (reflex run --backend-host 0.0.0.0)**
+   - Accesible desde cualquier dispositivo en la misma red
+   - URL: `http://[IP-DEL-SERVIDOR]:3000` (ej: `http://192.168.0.12:3000`)
+   - Requisitos:
+     - Todos los dispositivos deben estar en la misma red WiFi/LAN
+     - El firewall debe permitir conexiones al puerto 3000
+   - Ideal para:
+     - Pruebas en diferentes dispositivos
+     - Validación de responsividad
+     - Pruebas de usabilidad con usuarios reales
+
 ### Solución de Problemas Comunes
 - Si hay problemas con reflex, intenta ejecutar `reflex init` antes de `reflex run`
 - En caso de errores de dependencias, ejecuta `pip install --upgrade -r requirements.txt`

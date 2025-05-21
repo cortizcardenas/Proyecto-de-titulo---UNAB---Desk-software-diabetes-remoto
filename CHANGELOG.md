@@ -2,6 +2,15 @@
 
 ---
 
+## [2.1.2] - 19/05/2025
+### Añadido
+- Soporte para Acceso desde Red Local
+  - Implementación de modo de ejecución en red local
+  - Acceso desde cualquier dispositivo en la misma red
+  - Documentación de modos de ejecución:
+    - Modo Local (reflex run)
+    - Modo Red Local (reflex run --backend-host 0.0.0.0)
+
 ## [2.1.1] - 19/05/2025
 ### Añadido
 - Funcionalidad de Exportación a CSV
