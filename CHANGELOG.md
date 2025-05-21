@@ -2,6 +2,20 @@
 
 ---
 
+## [2.1.1] - 19/05/2025
+### Añadido
+- Funcionalidad de Exportación a CSV
+  - Nuevo botón de exportación en el dashboard
+  - Exportación de todas las lecturas de glucosa
+  - Incluye información detallada:
+    - Nombre del usuario
+    - Fecha y hora (original y formateada)
+    - Valor de glucosa
+    - Estado
+    - Categoría
+    - Notas
+  - Nombre de archivo personalizado con fecha y hora
+
 ## [2.1.0] - 18/05/2025
 ### Añadido
 - Panel Informativo de Rangos

@@ -49,6 +49,7 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 8. **Rangos de referencia clínicos:** información detallada sobre rangos normales, prediabetes y diabetes.
 9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas.
 10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color.
+11. **Exportación de datos:** funcionalidad para exportar el historial completo a formato CSV.
 
 ---
 
@@ -216,7 +217,7 @@ reflex run
 
 - Agregar gestión avanzada del perfil del usuario.
 - Mejorar visualización para dispositivos móviles.
-- Añadir exportación de datos en PDF/Excel.
+- Añadir exportación de datos en PDF.
 - Iniciar validación formal con usuarios reales (fase piloto).
 
 ---

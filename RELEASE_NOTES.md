@@ -1,5 +1,15 @@
 # Notas de Lanzamiento - Diabeduca
 
+## Versión 2.1.1 (19/05/2025)
+### Características Principales
+- **Exportación de Datos a CSV**
+  - Implementación de nueva funcionalidad de exportación
+  - Botón de exportación integrado en el dashboard
+  - Exportación completa de historial de lecturas
+  - Formato CSV con información detallada
+  - Nombres de archivo personalizados
+  - Interfaz en español
+
 ## Versión 2.1.0 (19/05/2025)
 ### Características Principales
 - **Panel Informativo de Rangos**

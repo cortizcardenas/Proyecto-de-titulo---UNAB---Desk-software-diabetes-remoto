@@ -1,5 +1,7 @@
 import reflex as rx
 import datetime
+import csv
+import io
 from typing import TypedDict, Optional, List, Dict
 from app import database
 from app.states.auth_state import AuthState
@@ -291,3 +293,51 @@ class GlucoseState(rx.State):
     def set_new_reading_category(self, categoria: str):
         """Actualiza la categoría seleccionada para una nueva lectura."""
         self.new_reading_category = categoria
+
+    @rx.event(background=True)
+    async def export_data_csv(self):
+        """Exporta las lecturas de glucosa actuales a un archivo CSV, incluyendo el nombre del usuario."""
+        if not self.formatted_readings:
+            yield rx.toast.warning("No hay datos para exportar.")
+            return
+        async with self:
+            auth_state = await self.get_state(AuthState)
+            user_name = (
+                auth_state.user_full_name
+                if auth_state.current_user
+                else "Usuario Desconocido"
+            )
+            current_formatted_readings = self.formatted_readings
+        if not current_formatted_readings:
+            yield rx.toast.warning(
+                "No hay datos para exportar después de la verificación final."
+            )
+            return
+        output = io.StringIO()
+        writer = csv.writer(output)
+        headers = [
+            "Usuario",
+            "Fecha y Hora Original",
+            "Fecha y Hora Formateada",
+            "Valor (mg/dL)",
+            "Estado",
+            "Categoría",
+            "Notas",
+        ]
+        writer.writerow(headers)
+        for reading in current_formatted_readings:
+            writer.writerow(
+                [
+                    user_name,
+                    reading["timestamp"],
+                    reading["formatted_timestamp"],
+                    reading["value"],
+                    reading["status"],
+                    reading["categoria"],
+                    reading["notes"] if reading["notes"] else "",
+                ]
+            )
+        csv_data = output.getvalue()
+        output.close()
+        filename = f"lecturas_glucosa_{user_name.replace(' ', '_')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        yield rx.download(data=csv_data, filename=filename)

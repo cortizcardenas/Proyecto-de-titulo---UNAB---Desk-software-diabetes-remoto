@@ -126,6 +126,14 @@ def dashboard():
                                 ),
                                 class_name="grid grid-cols-3 gap-3 mt-4",
                             ),
+                            rx.el.div(
+                                rx.el.button(
+                                    "Exportar Datos (CSV)",
+                                    on_click=GlucoseState.export_data_csv,
+                                    class_name="mt-4 w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2",
+                                ),
+                                class_name="mt-4",
+                            ),
                             class_name="p-6 bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mt-6",
                         ),
                         glucose_reference_ranges_box(),
