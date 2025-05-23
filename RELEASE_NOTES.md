@@ -140,6 +140,21 @@
 - Inicialización con Reflex
 - Configuración inicial
 
+## Versión 2.2.0 (22/05/2025)
+### Características Principales
+- **Módulo de Sugerencia Educativa**
+  - Sugerencias automáticas y personalizadas según el promedio de glicemia
+  - Botón para mostrar sugerencia educativa
+  - Sugerencias almacenadas localmente en SQLite
+- **Mejoras Visuales en Modo Light**
+  - Fondo general gris claro (#e5e7eb) para mayor comodidad visual
+  - Mejor contraste de textos y elementos
+- **Alineación y Coherencia Visual**
+  - Cajas del dashboard alineadas y uniformes en altura
+  - Título de sugerencia educativa dentro de su caja
+- **Corrección de Errores**
+  - Solucionado el bug al eliminar registros de glucosa (parámetros invertidos)
+
 ---
 
 ## Notas Adicionales

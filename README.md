@@ -42,7 +42,7 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 1. **Autenticación básica:** registro del usuario por nombre, sin uso de contraseñas.
 2. **Ingreso de glicemia:** validación por rango (20–600 mg/dL) y formato numérico.
 3. **Historial de lecturas:** listado ordenado con fecha, hora y observaciones.
-4. **Módulo educativo:** recomendaciones basadas en los valores ingresados.
+4. **Módulo educativo y sugerencias:** recomendaciones automáticas y personalizadas según el promedio de glicemia, con interfaz visual integrada y botón de sugerencia.
 5. **Gráficos interactivos:** evolución semanal y global de glicemia.
 6. **Visual web accesible:** navegación clara, diseño responsivo y logo institucional.
 7. **Funciona sin conexión permanente:** datos almacenados en SQLite localmente.
@@ -50,6 +50,7 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas.
 10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color.
 11. **Exportación de datos:** funcionalidad para exportar el historial completo a formato CSV.
+12. **Mejoras visuales:** modo light con fondo gris suave para mayor comodidad visual, contraste mejorado y alineación uniforme de cajas en el dashboard.
 
 ---
 
@@ -223,8 +224,10 @@ reflex run
 ✅ Sistema de contadores implementado  
 ✅ Rangos de referencia clínicos agregados  
 ✅ Panel informativo de rangos integrado  
-🔧 Desarrollo educativo en curso  
-📊 Visualización gráfica mejorada  
+✅ Módulo educativo y sugerencias automáticas funcionales  
+✅ Visualización gráfica mejorada  
+✅ Mejoras visuales en modo light y alineación de dashboard  
+✅ Corrección de eliminación de registros  
 🧪 Pruebas unitarias en entorno local  
 🧠 Retroalimentación educativa validada con fuentes confiables
 

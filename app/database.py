@@ -153,15 +153,62 @@ def initialize_database():
                 "Database not found, creating and initializing tables..."
             )
             cursor.execute(
-                "\n                CREATE TABLE users (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    email TEXT UNIQUE NOT NULL,\n                    password TEXT NOT NULL,\n                    full_name TEXT NOT NULL,\n                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n                )\n                "
+                """
+                CREATE TABLE users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    email TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    full_name TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+                """
             )
             print("Created 'users' table.")
             cursor.execute(
-                "\n                CREATE TABLE glucose_readings (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    user_id INTEGER NOT NULL,\n                    timestamp DATETIME NOT NULL,\n                    value REAL NOT NULL,\n                    notes TEXT,\n                    categoria TEXT DEFAULT 'No especificado', -- Columna categoria agregada\n                    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE\n                )\n                "
+                """
+                CREATE TABLE glucose_readings (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    timestamp DATETIME NOT NULL,
+                    value REAL NOT NULL,
+                    notes TEXT,
+                    categoria TEXT DEFAULT 'No especificado',
+                    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+                )
+                """
             )
-            print(
-                "Created 'glucose_readings' table with categoria and ON DELETE CASCADE."
+            print("Created 'glucose_readings' table with categoria and ON DELETE CASCADE.")
+            
+            # Crear tabla de sugerencias educativas
+            cursor.execute(
+                """
+                CREATE TABLE educational_suggestions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    min_value REAL NOT NULL,
+                    max_value REAL NOT NULL,
+                    suggestion TEXT NOT NULL,
+                    category TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+                """
             )
+            print("Created 'educational_suggestions' table.")
+            
+            # Insertar sugerencias iniciales
+            initial_suggestions = [
+                (0, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
+                (70, 100, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
+                (100, 140, "Tu nivel de glucosa está ligeramente elevado. Considera realizar actividad física moderada.", "Elevado"),
+                (140, 200, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
+                (200, 999, "Tu nivel de glucosa está muy alto. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
+            ]
+            
+            cursor.executemany(
+                "INSERT INTO educational_suggestions (min_value, max_value, suggestion, category) VALUES (?, ?, ?, ?)",
+                initial_suggestions
+            )
+            print("Inserted initial educational suggestions.")
+            
             conn.commit()
             print("Database initialized successfully.")
         else:
@@ -181,10 +228,19 @@ def initialize_database():
                     "Error: 'users' table is missing! Recreating..."
                 )
                 cursor.execute(
-                    "\n                    CREATE TABLE users (\n                        id INTEGER PRIMARY KEY AUTOINCREMENT,\n                        email TEXT UNIQUE NOT NULL,\n                        password TEXT NOT NULL,\n                        full_name TEXT NOT NULL,\n                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n                    )\n                    "
+                    """
+                    CREATE TABLE users (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        email TEXT UNIQUE NOT NULL,
+                        password TEXT NOT NULL,
+                        full_name TEXT NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                    """
                 )
                 conn.commit()
                 print("Created missing 'users' table.")
+            
             if _table_exists(cursor, "glucose_readings"):
                 _add_column_if_not_exists(
                     conn,
@@ -201,10 +257,53 @@ def initialize_database():
                     "Warning: 'glucose_readings' table is missing. Creating it now..."
                 )
                 cursor.execute(
-                    "\n                    CREATE TABLE glucose_readings (\n                        id INTEGER PRIMARY KEY AUTOINCREMENT,\n                        user_id INTEGER NOT NULL,\n                        timestamp DATETIME NOT NULL,\n                        value REAL NOT NULL,\n                        notes TEXT,\n                        categoria TEXT DEFAULT 'No especificado', -- Categoria agregada\n                        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE\n                    )\n                    "
+                    """
+                    CREATE TABLE glucose_readings (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        user_id INTEGER NOT NULL,
+                        timestamp DATETIME NOT NULL,
+                        value REAL NOT NULL,
+                        notes TEXT,
+                        categoria TEXT DEFAULT 'No especificado',
+                        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+                    )
+                    """
                 )
                 conn.commit()
                 print("Created 'glucose_readings' table.")
+            
+            # Verificar y crear la tabla educational_suggestions si no existe
+            if not _table_exists(cursor, "educational_suggestions"):
+                print("Creating 'educational_suggestions' table...")
+                cursor.execute(
+                    """
+                    CREATE TABLE educational_suggestions (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        min_value REAL NOT NULL,
+                        max_value REAL NOT NULL,
+                        suggestion TEXT NOT NULL,
+                        category TEXT NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                    """
+                )
+                
+                # Insertar sugerencias iniciales
+                initial_suggestions = [
+                    (0, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
+                    (70, 100, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
+                    (100, 140, "Tu nivel de glucosa está ligeramente elevado. Considera realizar actividad física moderada.", "Elevado"),
+                    (140, 200, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
+                    (200, 999, "Tu nivel de glucosa está muy alto. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
+                ]
+                
+                cursor.executemany(
+                    "INSERT INTO educational_suggestions (min_value, max_value, suggestion, category) VALUES (?, ?, ?, ?)",
+                    initial_suggestions
+                )
+                conn.commit()
+                print("Created and populated 'educational_suggestions' table.")
+            
             print("Database schema check complete.")
     except Exception as e:
         print(

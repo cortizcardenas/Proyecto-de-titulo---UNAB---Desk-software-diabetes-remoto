@@ -40,6 +40,7 @@ class GlucoseState(rx.State):
     new_reading_category: str = "ayuno"
     healthy_min: float = 70.0
     healthy_max: float = 100.0
+    current_suggestion: str = ""
 
     @rx.var
     async def user_id(self) -> int | None:
@@ -279,7 +280,7 @@ class GlucoseState(rx.State):
             )
             return
         success = database.delete_glucose_reading(
-            _user_id, reading_id
+            reading_id, _user_id
         )
         if success:
             yield rx.toast.success("Lectura eliminada.")
@@ -341,3 +342,8 @@ class GlucoseState(rx.State):
         output.close()
         filename = f"lecturas_glucosa_{user_name.replace(' ', '_')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         yield rx.download(data=csv_data, filename=filename)
+
+    def get_educational_suggestion(self):
+        """Obtiene una sugerencia educativa basada en el promedio de glucosa actual."""
+        from app.components.educational_suggestion import get_suggestion_for_glucose
+        self.current_suggestion = get_suggestion_for_glucose(self.average_glucose)

@@ -8,6 +8,7 @@ from app.components.glucose_history import (
 )
 from app.components.glucose_chart import glucose_chart
 from app.components.glucose_reference_ranges import glucose_reference_ranges_box
+from app.components.educational_suggestion import educational_suggestion_box
 
 
 def _stat_box(
@@ -44,8 +45,10 @@ def dashboard():
                 rx.el.div(
                     rx.el.div(
                         glucose_input_form(),
+                        educational_suggestion_box(),
                         glucose_history_list(),
-                        class_name="flex flex-col gap-6 w-full lg:w-1/3",
+                        class_name="flex flex-col gap-6 w-full lg:w-1/3 h-full justify-between",
+                        style={"minHeight": "100%"},
                     ),
                     rx.el.div(
                         glucose_chart(),
@@ -137,9 +140,11 @@ def dashboard():
                             class_name="p-6 bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mt-6",
                         ),
                         glucose_reference_ranges_box(),
-                        class_name="flex flex-col gap-6 w-full lg:w-2/3",
+                        class_name="flex flex-col gap-6 w-full lg:w-2/3 h-full justify-between",
+                        style={"minHeight": "100%"},
                     ),
-                    class_name="flex flex-col lg:flex-row gap-6 lg:gap-8",
+                    class_name="flex flex-col lg:flex-row gap-6 lg:gap-8 h-full",
+                    style={"minHeight": "70vh"},
                 ),
                 class_name="container mx-auto px-4 py-8",
             )
@@ -147,6 +152,6 @@ def dashboard():
         class_name=rx.cond(
             AuthState.theme == "dark",
             "min-h-screen bg-gray-900 dark",
-            "min-h-screen bg-gray-100",
+            "min-h-screen bg-[#e5e7eb]",
         ),
     )

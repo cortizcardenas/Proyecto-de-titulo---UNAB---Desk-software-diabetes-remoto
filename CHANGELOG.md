@@ -185,3 +185,18 @@
 ### Cambios
 - Actualización del repositorio principal con la última versión del proyecto.
 
+## [2.2.0] - 22/05/2025
+### Añadido
+- Módulo de sugerencia educativa completamente funcional:
+  - Sugerencias automáticas según el promedio de glicemia
+  - Botón para mostrar sugerencia personalizada
+  - Sugerencias almacenadas y gestionadas localmente en SQLite
+- Mejoras visuales en modo light:
+  - Fondo general gris claro (#e5e7eb) para mayor comodidad visual
+  - Mejor contraste de textos y elementos
+- Alineación y coherencia visual:
+  - Cajas del dashboard alineadas y uniformes en altura
+  - Título de sugerencia educativa dentro de su caja
+- Corrección de errores:
+  - Solucionado el bug al eliminar registros de glucosa (parámetros invertidos)
+
