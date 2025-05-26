@@ -1,131 +1,59 @@
 import reflex as rx
-from typing import List, Tuple, Dict, TypedDict, NotRequired
-
-
-class InfoSection(TypedDict):
-    title: str
-    ranges: List[Tuple[str, str, str]]
-    details: NotRequired[str]
-
 
 def glucose_reference_ranges_box() -> rx.Component:
-    """Componente para mostrar los rangos de referencia clínicos de glucosa en sangre."""
-    reference_sections: List[InfoSection] = [
-        {
-            "title": "1. Glucosa en Sangre en Ayunas (Sin ingesta de alimentos durante al menos 8 horas):",
-            "ranges": [
-                (
-                    "Normal:",
-                    "Entre 70 mg/dL y 99 mg/dL",
-                    "text-green-700 dark:text-green-400",
-                ),
-                (
-                    "Prediabetes (Glucosa en Ayunas Alterada):",
-                    "Entre 100 mg/dL y 125 mg/dL",
-                    "text-yellow-700 dark:text-yellow-400",
-                ),
-                (
-                    "Diabetes:",
-                    "126 mg/dL o superior (confirmado por dos mediciones separadas)",
-                    "text-red-700 dark:text-red-400",
-                ),
-            ],
-        },
-        {
-            "title": "2. Glucosa en Sangre 2 Horas Después de Comer (Postprandial):",
-            "ranges": [
-                (
-                    "Normal:",
-                    "Menos de 140 mg/dL",
-                    "text-green-700 dark:text-green-400",
-                ),
-                (
-                    "Prediabetes (Tolerancia a la Glucosa Alterada):",
-                    "Entre 140 mg/dL y 199 mg/dL",
-                    "text-yellow-700 dark:text-yellow-400",
-                ),
-                (
-                    "Diabetes:",
-                    "200 mg/dL o superior",
-                    "text-red-700 dark:text-red-400",
-                ),
-            ],
-        },
-        {
-            "title": "3. Glucosa en Sangre 3 Horas Después de Comer:",
-            "details": "Típicamente, los niveles de glucosa en sangre deberían haber vuelto cerca de los niveles en ayunas después de tres horas:",
-            "ranges": [
-                (
-                    "Normal:",
-                    "Entre 70 mg/dL y 100 mg/dL (idealmente por debajo de 100 mg/dL)",
-                    "text-green-700 dark:text-green-400",
-                ),
-                (
-                    "Control de Glucosa Alterado (Considerar Seguimiento Clínico):",
-                    "Entre 101 mg/dL y 139 mg/dL",
-                    "text-yellow-700 dark:text-yellow-400",
-                ),
-                (
-                    "Alto/Anormal:",
-                    "140 mg/dL o superior (puede indicar mal control de glucosa o resistencia a la insulina)",
-                    "text-red-700 dark:text-red-400",
-                ),
-            ],
-        },
-    ]
-
-    def render_range_item(
-        item_tuple: rx.Var[Tuple[str, str, str]],
-    ) -> rx.Component:
-        label = item_tuple[0]
-        value = item_tuple[1]
-        color_class_var = item_tuple[2]
-        return rx.el.li(
-            rx.el.strong(
-                label,
-                class_name="font-semibold "
-                + color_class_var,
-            ),
-            " " + value,
-            class_name="text-sm text-gray-700 dark:text-gray-300",
-        )
-
-    def render_info_section(
-        section_data: rx.Var[InfoSection],
-    ) -> rx.Component:
-        return rx.el.div(
-            rx.el.h4(
-                section_data["title"],
-                class_name="text-md font-semibold text-gray-800 dark:text-white mb-1",
-            ),
-            rx.cond(
-                section_data.contains("details"),
-                rx.el.p(
-                    section_data["details"],
-                    class_name="text-sm text-gray-600 dark:text-gray-400 mb-1 italic",
-                ),
-                rx.fragment(),
-            ),
-            rx.el.ul(
-                rx.foreach(
-                    section_data["ranges"].to(
-                        List[Tuple[str, str, str]]
-                    ),
-                    render_range_item,
-                ),
-                class_name="list-disc list-inside space-y-1 pl-4",
-            ),
-            class_name="mb-4",
-        )
-
+    """Componente para mostrar los rangos de referencia clínicos de glucosa en sangre, con mejor estética y claridad."""
     return rx.el.div(
         rx.el.h3(
             "Rangos de Referencia Clínicos de Glucosa en Sangre",
             class_name="text-xl font-semibold mb-4 text-gray-800 dark:text-white",
         ),
-        rx.foreach(reference_sections, render_info_section),
+        rx.el.div(
+            rx.el.table(
+                rx.el.thead(
+                    rx.el.tr(
+                        rx.el.th("Estado metabólico", class_name="px-4 py-3 border-b bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold text-left rounded-tl-lg"),
+                        rx.el.th("Rango de glucosa en sangre (mg/dL)", class_name="px-4 py-3 border-b bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold text-left"),
+                        rx.el.th("Descripción", class_name="px-4 py-3 border-b bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold text-left rounded-tr-lg"),
+                    )
+                ),
+                rx.el.tbody(
+                    rx.el.tr(
+                        rx.el.td("😨 Hipoglucemia grave", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("< 54", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Riesgo severo inmediato", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                    ),
+                    rx.el.tr(
+                        rx.el.td("😰 Hipoglucemia moderada", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("54–69", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Requiere acción para prevenir síntomas", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                    ),
+                    rx.el.tr(
+                        rx.el.td("😊 Rango óptimo (ayunas)", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("80–130", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Rango preprandial recomendado por ADA", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                    ),
+                    rx.el.tr(
+                        rx.el.td("😊 Rango óptimo (postprandial)", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("< 180", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Rango dentro de 1–2 horas después de comer (postprandial)", class_name="px-4 py-2 border-b bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                    ),
+                    rx.el.tr(
+                        rx.el.td("😐 Glucosa alta", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("181–250", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Nivel alto, debe considerarse ajuste o monitoreo frecuente", class_name="px-4 py-2 border-b bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"),
+                    ),
+                    rx.el.tr(
+                        rx.el.td("😬 Glucosa muy alta", class_name="px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-bl-lg"),
+                        rx.el.td("> 250", class_name="px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300"),
+                        rx.el.td("Críticamente alto", class_name="px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-br-lg"),
+                    ),
+                ),
+                class_name="w-full text-sm text-left overflow-x-auto",
+            ),
+            class_name="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700",
+        ),
         rx.el.p(
-            "Nota: Estas son pautas generales. Consulte a su proveedor de atención médica para obtener asesoramiento personalizado.",
+            "Nota: Estas son pautas generales basadas segun la ADA (American Diabetes Association). Siempre consulte a su Medico para asesoramiento personalizado.",
             class_name="text-xs text-gray-500 dark:text-gray-400 mt-4 italic text-center",
         ),
         class_name="p-6 bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mt-6",

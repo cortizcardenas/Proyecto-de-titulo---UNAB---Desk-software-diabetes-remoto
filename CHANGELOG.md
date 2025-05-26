@@ -200,3 +200,12 @@
 - Corrección de errores:
   - Solucionado el bug al eliminar registros de glucosa (parámetros invertidos)
 
+## [2.3.0] - 23/05/2025
+### Añadido
+- Footer global con disclaimer de prototipo, visible en todas las páginas (dashboard, login, registro).
+- Contadores de lecturas con iconos de caras (emojis) para bajas, saludables y altas.
+- Tabla de rangos clínicos mejorada: filas alternadas, bordes redondeados, colores de texto consistentes y emoticonos para cada rango.
+- Nueva nota en la tabla: "Nota: Estas son pautas generales basadas según la ADA (American Diabetes Association). Siempre consulte a su Medico para asesoramiento personalizado."
+- Mejoras de layout: el footer permanece pegado al fondo de la pantalla en todo momento.
+- Ajustes visuales generales para mayor coherencia y legibilidad en modo claro y oscuro.
+

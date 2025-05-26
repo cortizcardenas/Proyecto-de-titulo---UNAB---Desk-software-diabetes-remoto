@@ -155,6 +155,22 @@
 - **Corrección de Errores**
   - Solucionado el bug al eliminar registros de glucosa (parámetros invertidos)
 
+## Versión 2.3.0 (23/05/2025)
+### Características Principales
+- **Footer Global con Disclaimer**
+  - Mensaje de prototipo siempre visible al final de la página, en todas las vistas (dashboard, login, registro).
+  - Diseño consistente con el resto de la app.
+- **Contadores con Iconos de Caras (Emojis)**
+  - Los contadores de lecturas bajas, saludables y altas ahora incluyen emojis para facilitar la interpretación visual.
+- **Mejora Visual de la Tabla de Rangos Clínicos**
+  - Tabla clínica con filas alternadas, bordes redondeados y colores de texto consistentes.
+  - Emoticonos representativos para cada rango de glucosa.
+  - Nueva nota: "Nota: Estas son pautas generales basadas según la ADA (American Diabetes Association). Siempre consulte a su Medico para asesoramiento personalizado."
+- **Mejoras de Layout**
+  - El footer permanece pegado al fondo de la pantalla en todo momento.
+- **Ajustes Visuales Generales**
+  - Mejoras en contraste, responsividad y coherencia visual en modo claro y oscuro.
+
 ---
 
 ## Notas Adicionales

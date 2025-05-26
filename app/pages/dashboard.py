@@ -9,20 +9,28 @@ from app.components.glucose_history import (
 from app.components.glucose_chart import glucose_chart
 from app.components.glucose_reference_ranges import glucose_reference_ranges_box
 from app.components.educational_suggestion import educational_suggestion_box
+from app.components.footer import footer_disclaimer
 
 
 def _stat_box(
-    label: str, value: rx.Var[int], color_class: str
+    label: str, value: rx.Var[int], color_class: str, icon: str
 ) -> rx.Component:
     """Función auxiliar para crear un cuadro de estadísticas para contadores."""
     return rx.el.div(
-        rx.el.span(
-            value.to_string(),
-            class_name=f"text-2xl font-bold {color_class}",
-        ),
-        rx.el.span(
-            label,
-            class_name="text-xs text-gray-500 dark:text-gray-400 mt-1",
+        rx.el.div(
+            rx.el.span(
+                icon,
+                class_name="text-2xl mb-2",
+            ),
+            rx.el.span(
+                value.to_string(),
+                class_name=f"text-2xl font-bold {color_class}",
+            ),
+            rx.el.span(
+                label,
+                class_name="text-xs text-gray-500 dark:text-gray-400 mt-1",
+            ),
+            class_name="flex flex-col items-center justify-center",
         ),
         class_name="flex flex-col items-center justify-center p-3 rounded-md bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 text-center min-w-[70px]",
     )
@@ -116,16 +124,19 @@ def dashboard():
                                     "Bajas",
                                     GlucoseState.count_low_readings,
                                     "text-blue-600 dark:text-blue-400",
+                                    "😰",
                                 ),
                                 _stat_box(
                                     "Saludables",
                                     GlucoseState.count_healthy_readings,
                                     "text-green-600 dark:text-green-400",
+                                    "😊",
                                 ),
                                 _stat_box(
                                     "Altas",
                                     GlucoseState.count_high_readings,
                                     "text-red-600 dark:text-red-400",
+                                    "😐",
                                 ),
                                 class_name="grid grid-cols-3 gap-3 mt-4",
                             ),
@@ -146,12 +157,14 @@ def dashboard():
                     class_name="flex flex-col lg:flex-row gap-6 lg:gap-8 h-full",
                     style={"minHeight": "70vh"},
                 ),
-                class_name="container mx-auto px-4 py-8",
-            )
+                class_name="container mx-auto px-4 py-8 flex-grow",
+            ),
+            class_name="flex-grow"
         ),
+        footer_disclaimer(),
         class_name=rx.cond(
             AuthState.theme == "dark",
-            "min-h-screen bg-gray-900 dark",
-            "min-h-screen bg-[#e5e7eb]",
+            "flex flex-col min-h-screen bg-gray-900 dark",
+            "flex flex-col min-h-screen bg-[#e5e7eb]",
         ),
     )

@@ -46,11 +46,13 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 5. **Gráficos interactivos:** evolución semanal y global de glicemia.
 6. **Visual web accesible:** navegación clara, diseño responsivo y logo institucional.
 7. **Funciona sin conexión permanente:** datos almacenados en SQLite localmente.
-8. **Rangos de referencia clínicos:** información detallada sobre rangos normales, prediabetes y diabetes.
-9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas.
-10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color.
+8. **Rangos de referencia clínicos:** información detallada sobre rangos normales, prediabetes y diabetes, ahora con tabla mejorada, emoticonos y nota basada en la ADA.
+9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas, ahora con iconos de caras (emojis) para facilitar la interpretación visual.
+10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color y emoticonos.
 11. **Exportación de datos:** funcionalidad para exportar el historial completo a formato CSV.
 12. **Mejoras visuales:** modo light con fondo gris suave para mayor comodidad visual, contraste mejorado y alineación uniforme de cajas en el dashboard.
+13. **Footer global:** mensaje de disclaimer de prototipo siempre visible al final de la página, en todas las vistas.
+14. **Layout mejorado:** el footer permanece pegado al fondo de la pantalla en todo momento.
 
 ---
 
@@ -70,8 +72,9 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 - Restricción de rango fisiológico para glicemia.
 - Solo se generan gráficos y sugerencias si hay registros válidos.
 - Visualización educativa solo con contexto previo.
-- Contadores automáticos de lecturas por categoría.
-- Rangos de referencia basados en guías clínicas actualizadas.
+- Contadores automáticos de lecturas por categoría, con iconos de caras.
+- Rangos de referencia basados en guías clínicas actualizadas y visualizados con emoticonos.
+- Footer de seguridad siempre visible.
 
 ---
 
@@ -221,11 +224,12 @@ reflex run
 ## 📌 Estado Actual
 
 ✅ MVP funcional  
-✅ Sistema de contadores implementado  
-✅ Rangos de referencia clínicos agregados  
+✅ Sistema de contadores implementado (ahora con iconos de caras)  
+✅ Rangos de referencia clínicos agregados (ahora con tabla mejorada, emoticonos y nota ADA)  
 ✅ Panel informativo de rangos integrado  
 ✅ Módulo educativo y sugerencias automáticas funcionales  
 ✅ Visualización gráfica mejorada  
+✅ Footer global de seguridad en todas las páginas  
 ✅ Mejoras visuales en modo light y alineación de dashboard  
 ✅ Corrección de eliminación de registros  
 🧪 Pruebas unitarias en entorno local  
