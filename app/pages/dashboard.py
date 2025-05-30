@@ -62,7 +62,7 @@ def dashboard():
                         glucose_chart(),
                         rx.el.div(
                             rx.el.h3(
-                                "Estadísticas",
+                                "Resumen de Control Glucémico",
                                 class_name="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-200",
                             ),
                             rx.el.div(
@@ -77,39 +77,43 @@ def dashboard():
                                 rx.match(
                                     GlucoseState.average_glucose_status,
                                     (
-                                        "Bajo",
+                                        "MUY BAJO",
                                         rx.el.span(
-                                            rx.icon(
-                                                tag="arrow_down",
-                                                size=16,
-                                                class_name="inline mr-1 align-text-bottom",
-                                            ),
-                                            "Bajo - ¡Precaución!",
-                                            class_name="ml-2 text-sm font-semibold text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/50",
+                                            "😨 MUY BAJO - Riesgo severo inmediato",
+                                            class_name="ml-2 text-xl font-bold text-purple-600 dark:text-purple-400 px-6 py-3 rounded-lg bg-purple-100 dark:bg-purple-900/50",
+                                            style={"minWidth": "360px", "display": "inline-block", "textAlign": "center"},
                                         ),
                                     ),
                                     (
-                                        "Alto",
+                                        "Bajo",
                                         rx.el.span(
-                                            rx.icon(
-                                                tag="flag_triangle_right",
-                                                size=16,
-                                                class_name="inline mr-1 align-text-bottom",
-                                            ),
-                                            "Alto - Monitorear",
-                                            class_name="ml-2 text-sm font-semibold text-yellow-600 dark:text-yellow-400 px-2 py-0.5 rounded bg-yellow-100 dark:bg-yellow-900/50",
+                                            "😰 Bajo - ¡Precaución!",
+                                            class_name="ml-2 text-xl font-bold text-blue-600 dark:text-blue-400 px-6 py-3 rounded-lg bg-blue-100 dark:bg-blue-900/50",
+                                            style={"minWidth": "360px", "display": "inline-block", "textAlign": "center"},
                                         ),
                                     ),
                                     (
                                         "Saludable",
                                         rx.el.span(
-                                            rx.icon(
-                                                tag="square_check",
-                                                size=16,
-                                                class_name="inline mr-1 align-text-bottom",
-                                            ),
-                                            "Rango Saludable",
-                                            class_name="ml-2 text-sm font-semibold text-green-600 dark:text-green-400 px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/50",
+                                            "😊 Rango Saludable",
+                                            class_name="ml-2 text-xl font-bold text-green-600 dark:text-green-400 px-6 py-3 rounded-lg bg-green-100 dark:bg-green-900/50",
+                                            style={"minWidth": "360px", "display": "inline-block", "textAlign": "center"},
+                                        ),
+                                    ),
+                                    (
+                                        "Alto",
+                                        rx.el.span(
+                                            "😐 Alto - Monitorear",
+                                            class_name="ml-2 text-xl font-bold text-yellow-700 dark:text-yellow-400 px-6 py-3 rounded-lg bg-yellow-100 dark:bg-yellow-900/50",
+                                            style={"minWidth": "360px", "display": "inline-block", "textAlign": "center"},
+                                        ),
+                                    ),
+                                    (
+                                        "Muy Alto",
+                                        rx.el.span(
+                                            "😬 Muy Alto - Peligro",
+                                            class_name="ml-2 text-xl font-bold text-red-600 dark:text-red-400 px-6 py-3 rounded-lg bg-red-100 dark:bg-red-900/50",
+                                            style={"minWidth": "360px", "display": "inline-block", "textAlign": "center"},
                                         ),
                                     ),
                                     rx.el.span(

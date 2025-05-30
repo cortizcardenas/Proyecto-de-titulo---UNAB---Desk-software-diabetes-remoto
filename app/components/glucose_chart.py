@@ -75,6 +75,12 @@ def glucose_chart() -> rx.Component:
                         stroke="#facc15",
                         stroke_dasharray="3 3",
                     ),
+                    rx.recharts.reference_line(
+                        y=GlucoseState.postprandial_max.to(int),
+                        label="Maximo Postprandial",
+                        stroke="#f97316",
+                        stroke_dasharray="3 3",
+                    ),
                     data=GlucoseState.readings_for_chart,
                     margin={
                         "top": 5,

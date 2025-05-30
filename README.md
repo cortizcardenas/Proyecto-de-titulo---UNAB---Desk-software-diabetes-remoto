@@ -9,6 +9,22 @@
 
 ---
 
+## 🆕 Cambios Recientes (26/05/2025)
+
+- Actualización de todos los rangos de glucosa y lógica matemática para MUY BAJO (<54), Bajo (54-69), Saludable (70-130), Alto (131-250), Muy Alto (>250).
+- Eliminación de las categorías "Despues de comer", "2-3h Despues de comer" y "unspecified".
+- Agregado de las categorías "3hrs Despues de Comer" y "Antes de Dormir" (ambas con lógica de Ayuno).
+- Validación estricta de categorías permitidas en el input y en la lógica.
+- Actualización de sugerencias educativas y base de datos para reflejar los nuevos rangos.
+- Actualización de la tabla de referencia clínica y líneas de referencia en el gráfico.
+- Colores y emojis consistentes en todos los estados: morado (MUY BAJO), azul (Bajo), verde (Saludable), amarillo (Alto), rojo (Muy Alto).
+- Lógica de glucosa promedio ahora sigue los mismos rangos que Ayuno.
+- Alerta de glucosa promedio ahora usa emojis y colores grandes y visibles, ideal para personas mayores.
+- Cambio de nombre de la sección "Estadísticas" a "Resumen de Control Glucémico".
+- Limpieza de referencias antiguas y refuerzo de coherencia visual y lógica en toda la app.
+
+---
+
 ## 🩺 Contexto del Proyecto
 
 En Chile, aproximadamente el 11% de la población adulta vive con diabetes. Esta enfermedad, que alguna vez se asoció principalmente a adultos mayores, ha aumentado considerablemente en jóvenes y adultos entre 25 y 50 años. A pesar del impacto sanitario, social y económico que conlleva, aún existen carencias en herramientas tecnológicas accesibles que promuevan la **educación, autocuidado y seguimiento efectivo** de los pacientes diabéticos.
@@ -39,20 +55,36 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 
 ## 🧩 Módulos del MVP Implementado
 
-1. **Autenticación básica:** registro del usuario por nombre, sin uso de contraseñas.
-2. **Ingreso de glicemia:** validación por rango (20–600 mg/dL) y formato numérico.
-3. **Historial de lecturas:** listado ordenado con fecha, hora y observaciones.
-4. **Módulo educativo y sugerencias:** recomendaciones automáticas y personalizadas según el promedio de glicemia, con interfaz visual integrada y botón de sugerencia.
-5. **Gráficos interactivos:** evolución semanal y global de glicemia.
-6. **Visual web accesible:** navegación clara, diseño responsivo y logo institucional.
-7. **Funciona sin conexión permanente:** datos almacenados en SQLite localmente.
-8. **Rangos de referencia clínicos:** información detallada sobre rangos normales, prediabetes y diabetes, ahora con tabla mejorada, emoticonos y nota basada en la ADA.
-9. **Sistema de contadores:** seguimiento de lecturas bajas, saludables y altas, ahora con iconos de caras (emojis) para facilitar la interpretación visual.
-10. **Panel informativo:** visualización clara de rangos de referencia con códigos de color y emoticonos.
-11. **Exportación de datos:** funcionalidad para exportar el historial completo a formato CSV.
-12. **Mejoras visuales:** modo light con fondo gris suave para mayor comodidad visual, contraste mejorado y alineación uniforme de cajas en el dashboard.
-13. **Footer global:** mensaje de disclaimer de prototipo siempre visible al final de la página, en todas las vistas.
-14. **Layout mejorado:** el footer permanece pegado al fondo de la pantalla en todo momento.
+1. **Autenticarse en la aplicación**
+   - Permite identificar al usuario mediante un nombre (sin uso de contraseña en la versión MVP).
+   - Es el punto de entrada para acceder a todas las funciones posteriores.
+   - Justificación: ayuda a individualizar registros en dispositivos compartidos.
+
+2. **Registrar glicemia**
+   - El usuario puede ingresar manualmente el valor de su glicemia.
+   - Incluye validación automática de tipo (número) y rango fisiológico (20–600 mg/dL).
+   - Este valor queda almacenado con timestamp y asociado al usuario.
+
+3. **Visualizar historial**
+   - Muestra al usuario una lista ordenada de todos los registros anteriores.
+   - Permite revisar valores junto con fecha, hora, categoría y sugerencias vinculadas.
+
+4. **Recibir sugerencias**
+   - Al registrar un valor, el sistema analiza el dato y muestra un mensaje adaptado (por ejemplo, sobre alimentación o autocuidado).
+   - Este módulo educativo es clave para reforzar hábitos saludables y empoderar al usuario en la toma de decisiones.
+
+5. **Acceder vía navegador**
+   - Diabeduca está diseñada para ejecutarse en navegadores web de escritorio, utilizando Reflex como framework.
+   - Este acceso multiplataforma garantiza portabilidad y autonomía sin necesidad de instalación en cada equipo de la misma red local.
+
+6. **Visualizar módulo educativo**
+   - El usuario puede visualizar a una sección de contenidos educativos adaptados a personas con diabetes.
+   - Esta sección se basa en fuentes verificadas como MINSAL, ADA y MedlinePlus.
+   - Refuerza el aprendizaje continuo y complementa las sugerencias automáticas.
+
+7. **Ver estadísticas y exportar datos**
+   - Permite generar gráficos y exportar (CSV) los valores y fechas registrados.
+   - El objetivo es facilitar la detección de patrones, progresos y necesidades de ajuste en la rutina del usuario.
 
 ---
 
@@ -83,25 +115,42 @@ Desarrollar un prototipo funcional de una aplicación web local que facilite el 
 ```
 diabeduca/
 ├── app/                    # Lógica principal de la aplicación
-│   ├── pages/             # Páginas de la aplicación
-│   ├── states/            # Estados y lógica de negocio
-│   ├── components/        # Componentes reutilizables
-│   ├── app.py            # Configuración principal de la aplicación
-│   ├── database.py       # Configuración y modelos de la base de datos
-│   └── __init__.py       # Inicialización del módulo
-├── assets/                # Recursos estáticos
-│   └── favicon.ico       # Ícono de la aplicación
-├── .states/              # Estados de Reflex
-├── .web/                 # Archivos generados por Reflex
-├── build/                # Archivos de construcción
-├── dist/                 # Distribución de la aplicación
-├── venv/                 # Entorno virtual de Python
-├── diabetes_management.db # Base de datos SQLite
-├── rxconfig.py          # Configuración de Reflex
-├── requirements.txt     # Dependencias del proyecto
-├── CHANGELOG.md         # Registro de cambios
-├── RELEASE_NOTES.md     # Notas de lanzamiento
-└── README.md            # Documentación principal
+│   ├── pages/              # Páginas de la aplicación (dashboard, sign_in, sign_up)
+│   │   ├── dashboard.py
+│   │   ├── sign_in.py
+│   │   ├── sign_up.py
+│   │   └── __init__.py
+│   ├── states/             # Estados y lógica de negocio (glucosa, autenticación)
+│   │   ├── glucose_state.py
+│   │   ├── auth_state.py
+│   │   └── __init__.py
+│   ├── components/         # Componentes reutilizables (inputs, tablas, gráficos, etc.)
+│   │   ├── glucose_input.py
+│   │   ├── glucose_history.py
+│   │   ├── glucose_chart.py
+│   │   ├── glucose_reference_ranges.py
+│   │   ├── navbar.py
+│   │   ├── footer.py
+│   │   ├── educational_suggestion.py
+│   │   ├── sign_up_card.py
+│   │   ├── sign_in_card.py
+│   │   └── __init__.py
+│   ├── app.py              # Configuración principal de la aplicación
+│   ├── database.py         # Configuración y modelos de la base de datos
+│   └── __init__.py         # Inicialización del módulo
+├── assets/                 # Recursos estáticos
+│   └── favicon.ico         # Ícono de la aplicación
+├── .states/                # Estados de Reflex
+├── .web/                   # Archivos generados por Reflex
+├── build/                  # Archivos de construcción
+├── dist/                   # Distribución de la aplicación
+├── venv/                   # Entorno virtual de Python
+├── diabetes_management.db  # Base de datos SQLite
+├── rxconfig.py             # Configuración de Reflex
+├── requirements.txt        # Dependencias del proyecto
+├── CHANGELOG.md            # Registro de cambios
+├── RELEASE_NOTES.md        # Notas de lanzamiento
+└── README.md               # Documentación principal
 ```
 
 ---
@@ -235,14 +284,7 @@ reflex run
 🧪 Pruebas unitarias en entorno local  
 🧠 Retroalimentación educativa validada con fuentes confiables
 
----
 
-## 💡 Próximos pasos
-
-- Agregar gestión avanzada del perfil del usuario.
-- Mejorar visualización para dispositivos móviles.
-- Añadir exportación de datos en PDF.
-- Iniciar validación formal con usuarios reales (fase piloto).
 
 ---
 

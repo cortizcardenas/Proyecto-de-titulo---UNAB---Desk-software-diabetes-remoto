@@ -6,9 +6,9 @@ def glucose_input_form() -> rx.Component:
     """Formulario para agregar una nueva lectura de glucosa, incluyendo selección de categoría."""
     categories = [
         "Ayuno",
-        "Despues de comer",
-        "2-3h Despues de comer",
-        "unspecified",
+        "2hrs Despues de Comer",
+        "3hrs Despues de Comer",
+        "Antes de Dormir",
     ]
     return rx.el.div(
         rx.el.h2(

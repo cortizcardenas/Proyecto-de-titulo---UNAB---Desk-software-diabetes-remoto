@@ -39,7 +39,8 @@ class GlucoseState(rx.State):
     new_reading_notes: str = ""
     new_reading_category: str = "ayuno"
     healthy_min: float = 70.0
-    healthy_max: float = 100.0
+    healthy_max: float = 130.0
+    postprandial_max: float = 180.0
     current_suggestion: str = ""
 
     @rx.var
@@ -60,16 +61,20 @@ class GlucoseState(rx.State):
 
     @rx.var
     def average_glucose_status(self) -> str:
-        """Determines the status of the overall average glucose based on ayuno range."""
+        """Determina el estado del promedio de glucosa usando la lógica de Ayuno."""
         avg = self.average_glucose
         if avg == 0.0 and (not self.readings):
             return "Sin lecturas"
-        elif avg < self.healthy_min:
+        elif avg < 54:
+            return "MUY BAJO"
+        elif avg < 70:
             return "Bajo"
-        elif avg > self.healthy_max:
+        elif avg <= 130:
+            return "Saludable"
+        elif avg <= 250:
             return "Alto"
         else:
-            return "Saludable"
+            return "Muy Alto"
 
     @rx.var
     def count_low_readings(self) -> int:
@@ -86,14 +91,22 @@ class GlucoseState(rx.State):
         """Cuenta el número de lecturas altas."""
         return len([r for r in self.readings if r["value"] > self.healthy_max])
 
-    def _get_reading_status(self, value: float) -> str:
-        """Determines if a reading is low, healthy, or high based on ayuno range."""
-        if value < self.healthy_min:
+    def _get_reading_status(self, value: float, categoria: str) -> str:
+        """Determina si una lectura es baja, saludable o alta basado en los rangos y categoría."""
+        if value < 54:
+            return "MUY BAJO"
+        elif value < 70:
             return "Bajo"
-        elif value > self.healthy_max:
+        elif value <= 130:
+            return "Saludable"
+        elif value <= 250 and categoria == "2hrs Despues de Comer":
+            return "Saludable"
+        elif value <= 130 and (categoria == "3hrs Despues de Comer" or categoria == "Antes de Dormir"):
+            return "Saludable"
+        elif value <= 250:
             return "Alto"
         else:
-            return "Saludable"
+            return "Muy Alto"
 
     @rx.var
     def formatted_readings(
@@ -116,7 +129,7 @@ class GlucoseState(rx.State):
                 formatted_ts = dt.strftime("%Y-%m-%d %H:%M")
             except ValueError:
                 formatted_ts = "Invalid Date"
-            status = self._get_reading_status(r["value"])
+            status = self._get_reading_status(r["value"], r["categoria"])
             formatted.append(
                 FormattedReadingDict(
                     id=r["id"],
@@ -236,9 +249,9 @@ class GlucoseState(rx.State):
             return
         valid_categories = [
             "Ayuno",
-            "Despues de comer",
-            "2-3h Despues de comer",
-            "unspecified",
+            "2hrs Despues de Comer",
+            "3hrs Despues de Comer",
+            "Antes de Dormir",
         ]
         if categoria not in valid_categories:
             yield rx.toast.warning(

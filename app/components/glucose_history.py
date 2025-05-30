@@ -38,20 +38,26 @@ def glucose_history_list() -> rx.Component:
                                     rx.el.span(
                                         reading["status"],
                                         class_name=rx.match(
-                                            reading[
-                                                "status"
-                                            ],
+                                            reading["status"],
+                                            (
+                                                "MUY BAJO",
+                                                "text-purple-600 dark:text-purple-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/50 mr-2",
+                                            ),
                                             (
                                                 "Bajo",
                                                 "text-blue-600 dark:text-blue-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/50 mr-2",
                                             ),
                                             (
-                                                "Alto",
-                                                "text-red-600 dark:text-red-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-red-100 dark:bg-red-900/50 mr-2",
-                                            ),
-                                            (
                                                 "Saludable",
                                                 "text-green-600 dark:text-green-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/50 mr-2",
+                                            ),
+                                            (
+                                                "Alto",
+                                                "text-yellow-700 dark:text-yellow-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-yellow-100 dark:bg-yellow-900/50 mr-2",
+                                            ),
+                                            (
+                                                "Muy Alto",
+                                                "text-red-600 dark:text-red-400 font-semibold text-xs px-1.5 py-0.5 rounded bg-red-100 dark:bg-red-900/50 mr-2",
                                             ),
                                             "text-gray-600 dark:text-gray-400 font-semibold text-xs mr-2",
                                         ),

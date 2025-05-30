@@ -196,11 +196,12 @@ def initialize_database():
             
             # Insertar sugerencias iniciales
             initial_suggestions = [
-                (0, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
-                (70, 100, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
-                (100, 140, "Tu nivel de glucosa está ligeramente elevado. Considera realizar actividad física moderada.", "Elevado"),
-                (140, 200, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
-                (200, 999, "Tu nivel de glucosa está muy alto. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
+                (0, 54, "Tu nivel de glucosa está MUY BAJO. Busca atención médica inmediata y consume una fuente rápida de carbohidratos.", "MUY BAJO"),
+                (54, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
+                (70, 131, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
+                (131, 181, "Tu nivel de glucosa está elevado. Si es postprandial, monitorea. Si no, considera realizar actividad física moderada.", "Elevado"),
+                (181, 251, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
+                (251, 999, "Tu nivel de glucosa está MUY ALTO. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
             ]
             
             cursor.executemany(
@@ -290,11 +291,12 @@ def initialize_database():
                 
                 # Insertar sugerencias iniciales
                 initial_suggestions = [
-                    (0, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
-                    (70, 100, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
-                    (100, 140, "Tu nivel de glucosa está ligeramente elevado. Considera realizar actividad física moderada.", "Elevado"),
-                    (140, 200, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
-                    (200, 999, "Tu nivel de glucosa está muy alto. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
+                    (0, 54, "Tu nivel de glucosa está MUY BAJO. Busca atención médica inmediata y consume una fuente rápida de carbohidratos.", "MUY BAJO"),
+                    (54, 70, "Tu nivel de glucosa está bajo. Considera consumir una fuente rápida de carbohidratos como jugo de frutas o caramelos.", "Bajo"),
+                    (70, 131, "¡Excelente! Tu nivel de glucosa está en un rango saludable. Mantén tus hábitos actuales.", "Saludable"),
+                    (131, 181, "Tu nivel de glucosa está elevado. Si es postprandial, monitorea. Si no, considera realizar actividad física moderada.", "Elevado"),
+                    (181, 251, "Tu nivel de glucosa está alto. Revisa tu alimentación y considera consultar con tu médico.", "Alto"),
+                    (251, 999, "Tu nivel de glucosa está MUY ALTO. Es importante que consultes con tu médico lo antes posible.", "Muy Alto")
                 ]
                 
                 cursor.executemany(

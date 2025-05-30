@@ -2,6 +2,22 @@
 
 ---
 
+## [2.4.0] - 26/05/2025
+### Añadido y Cambiado
+- Actualización de todos los rangos de glucosa y lógica matemática para MUY BAJO (<54), Bajo (54-69), Saludable (70-130), Alto (131-250), Muy Alto (>250).
+- Eliminación de las categorías "Despues de comer", "2-3h Despues de comer" y "unspecified".
+- Agregado de las categorías "3hrs Despues de Comer" y "Antes de Dormir" (ambas con lógica de Ayuno).
+- Validación estricta de categorías permitidas en el input y en la lógica.
+- Actualización de sugerencias educativas y base de datos para reflejar los nuevos rangos.
+- Actualización de la tabla de referencia clínica y líneas de referencia en el gráfico.
+- Colores y emojis consistentes en todos los estados: morado (MUY BAJO), azul (Bajo), verde (Saludable), amarillo (Alto), rojo (Muy Alto).
+- Lógica de glucosa promedio ahora sigue los mismos rangos que Ayuno.
+- Alerta de glucosa promedio ahora usa emojis y colores grandes y visibles, ideal para personas mayores.
+- Cambio de nombre de la sección "Estadísticas" a "Resumen de Control Glucémico".
+- Limpieza de referencias antiguas y refuerzo de coherencia visual y lógica en toda la app.
+
+---
+
 ## [2.1.2] - 19/05/2025
 ### Añadido
 - Soporte para Acceso desde Red Local
