@@ -167,22 +167,18 @@ diabeduca/
 ```bash
 # Framework y Backend
 reflex==0.7.8a1        # Framework web principal
-bcrypt==4.1.2         # Encriptación de datos
-sqlalchemy==2.0.28    # ORM para base de datos
-python-dotenv==1.0.1  # Manejo de variables de entorno
+bcrypt==4.1.2          # Encriptación de datos
 
 # Base de Datos
 # SQLite3 viene incluido con Python 3.11, no requiere instalación adicional
 
-# Análisis de Datos y Visualización
-plotly==5.18.0        # Gráficos interactivos
-pandas==2.2.1         # Manipulación de datos
-numpy==1.26.4         # Cálculos numéricos
+# Utilidades estándar de Python (no requieren instalación)
+# - csv, io, datetime, os
 
-# Herramientas de Desarrollo
-pytest==8.0.2         # Testing
-black==24.2.0         # Formateador de código
-ruff==0.2.2          # Linter
+# Herramientas de Desarrollo (opcional, recomendadas para desarrollo)
+black==24.2.0          # Formateador de código
+ruff==0.2.2            # Linter
+pytest==8.0.2          # Testing
 ```
 
 ### Pasos de Instalación
