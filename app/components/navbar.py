@@ -6,7 +6,7 @@ def navbar() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.a(
-                "Diabeduca",
+                "Diabeduca, Educacion y Control en tus manos.",
                 href="/dashboard",
                 class_name="text-xl font-bold text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400",
             ),
@@ -14,6 +14,10 @@ def navbar() -> rx.Component:
                 rx.el.span(
                     f"Usuario: {AuthState.user_full_name}",
                     class_name="text-sm text-gray-600 dark:text-gray-300 hidden md:inline-block",
+                ),
+                rx.el.span(
+                    "Emergencias 131 🚑",
+                    class_name="text-xs font-bold text-red-600 bg-red-100 px-3 py-1 rounded ml-4",
                 ),
                 rx.el.button(
                     rx.cond(

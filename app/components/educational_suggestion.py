@@ -34,6 +34,22 @@ def educational_suggestion_box() -> rx.Component:
                 on_click=GlucoseState.get_educational_suggestion,
                 class_name="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200",
             ),
+            rx.el.p(
+                "ℹ️ Recuerda: La educación continua es clave para el autocuidado en diabetes. Consulta siempre fuentes confiables nacionales como la ADICH (Asociación de Diabéticos de Chile) , MINSAL o tu medico tratante.",
+                class_name="mt-2 text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 rounded p-2",
+            ),
+            rx.el.p(
+                "ADICH (Asociación de Diabéticos de Chile): +56 2 2678 0500 | Fundación Diabetes Juvenil: +56 2 2367 3900",
+                class_name="mt-1 text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 rounded p-2 text-center",
+            ),
+            rx.el.p(
+                "💡 Tip: La insulina de acción rápida comienza a actuar a los 15 minutos de la inyección, alcanza su pico en 1 hora y dura entre 2 y 4 horas. La insulina de acción prolongada actúa varias horas después de la inyección y mantiene su efecto estable durante unas 24 horas.",
+                class_name="mt-2 text-xs text-yellow-800 bg-yellow-100 dark:text-yellow-200 dark:bg-yellow-900/30 rounded p-2",
+            ),
+            rx.el.p(
+                "Fuente: Información extraída de las páginas web de la Asociación Americana de Diabetes (ADA), la Asociación de Diabéticos de Chile (ADICH) y el Ministerio de Salud (MINSAL).",
+                class_name="mt-2 text-xs text-gray-500 dark:text-gray-400 italic text-center",
+            ),
             rx.cond(
                 GlucoseState.current_suggestion != "",
                 rx.el.div(
